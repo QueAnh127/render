@@ -1,5 +1,75 @@
-<h1><%= @product.name %></h1>
+<% cache @product do %>
+    <h1><%= @product.name %></h1>
+    <div class="product-details">
+      <p><%= @product.description %></p>
+      <% if @product.featured_image.attached? %>
+        <%= image_tag @product.featured_image, class: "product-image" %>
+      <% end %>
+      <br>
+        <%= link_to "Back", products_path, class: "back-link" %>
+        <%= link_to "Edit", edit_product_path(@product), class: "edit-link" %>
+        <%= button_to "Delete", @product, method: :delete, data: { turbo_confirm: "Are you sure?" }, class: "delete-button" %>
+  
+    </div>
+    
+  <% end %>
 
-<%= link_to "Back", products_path %>
-<%= link_to "Edit", edit_product_path(@product) %>
-<%= button_to "Delete", @product, method: :delete, data: { turbo_confirm: "Are you sure?" } %>
+<style>
+/* Style for the h1 header */
+h1 {
+  font-size: 2em;
+  color: #333;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Style for the product details */
+.product-details {
+  text-align: center;
+  margin: 20px auto;
+  max-width: 600px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background-color: #f9f9f9;
+}
+
+/* Style for the product image */
+.product-image {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+/* Style for the product description */
+.product-details p {
+  font-size: 1.2em;
+  color: #666;
+}
+
+/* Style for the links and button */
+a.back-link, a.edit-link, button.delete-button {
+  display: inline-block;
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 1em;
+  color: #fff;
+  background-color: #007bff;
+  text-decoration: none;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+a.back-link:hover, a.edit-link:hover, button.delete-button:hover {
+  background-color: #0056b3;
+}
+
+/* Style for the delete button */
+button.delete-button {
+  background-color: #dc3545;
+}
+
+button.delete-button:hover {
+  background-color: #c82333;
+}
+</style>
