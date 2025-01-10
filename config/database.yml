@@ -85,6 +85,7 @@ production:
     <<: *default
     database: store_production
     username: store
+    url: <%= ENV['DATABASE_URL'] %>
     password: <%= ENV["STORE_DATABASE_PASSWORD"] %>
   cache:
     <<: *primary_production
